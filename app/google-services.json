@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "508847381165",
+    "project_id": "moviescope-76609",
+    "storage_bucket": "moviescope-76609.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508847381165:android:80672db767dd61e3fb4424",
+        "android_client_info": {
+          "package_name": "com.example.moviescope"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB67GpOtPLjKVXCj7poPK3zF3jcOUMTYG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

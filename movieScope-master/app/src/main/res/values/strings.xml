@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MovieScope</string>
+    <string name="login_text_button">Login</string>
+    <string name="register_text_button">Register</string>>
+    <string name="movie_search">Movie Search</string>
+    <string name="enter_search">Enter a movie</string>
+    <string name="movieList_text">Movie List</string>
+    <string name="favorites">Favorites</string>
+    <string name="setting">Settings</string>
+    <string name="name_hint">Enter your Username</string>
+    <string name="pass_hint">Enter your password</string>
+    <string name="forget">Forgot your password</string>
+    <string name="password_text_hint">Enter Password</string>
+    <string name="email_text_hint">Enter E-mail</string>
+    <string name="username_text_hint">Enter Username</string>
+    <string name="re_password_text_hint"> Confirm Enter Password</string>
+    <string name="movieDetailsText">Movie Details</string>
+    <string name="welcome">Welcome</string>
+    <string name="e_mail">Enter your email address</string>
+    <string name="reset_button">Reset Password</string>
+    <string name="home">Home</string>
+    <string name="fav">Favorites</string>
+
+</resources>

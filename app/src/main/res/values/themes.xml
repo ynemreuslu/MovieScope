@@ -1,0 +1,46 @@
+<resources>
+    <!-- Base application theme -->
+    <style name="Base.Theme.MovieScope" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/blue</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_dark_onPrimaryContainer</item>
+    </style>
+
+    <!-- Theme.MovieScope -->
+    <style name="Theme.MovieScope" parent="Base.Theme.MovieScope"/>
+
+    <!-- Theme.App.SplashScreen -->
+    <style name="Theme.App.SplashScreen" parent="Base.Theme.MovieScope">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/play_1</item>
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="postSplashScreenTheme">@drawable/baseline_play_circle_24</item>
+    </style>
+
+    <!-- Theme.App -->
+    <style name="Theme.App" parent="Theme.MaterialComponents">
+        <item name="bottomNavigationStyle">
+            @style/Widget.MaterialComponents.BottomNavigationView.Colored
+        </item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorOnPrimary">#1E88E5</item>
+    </style>
+
+    <style name="AppTheme.AppBar" parent="Theme.MaterialComponents">
+        <item name="appBarLayoutStyle">
+            @style/Widget.MaterialComponents.ActionBar.PrimarySurface
+        </item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/blue</item>
+        <item name="colorPrimaryContainer">#FFFFFF</item>
+    </style>
+
+    <style name="search">
+        <item name="android:background">#CFD6DB</item>
+        <item name="android:backgroundTint">#CFD6DB</item>
+
+    </style>
+
+
+</resources>

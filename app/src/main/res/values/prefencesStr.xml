@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language_options">
+        <item>@string/eng</item>
+        <item>@string/tr</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>en</item>
+        <item>tr</item>
+    </string-array>
+
+    <string name="theme">Theme</string>
+    <string name="dark_theme_enable">Enable or disable dark theme</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="lan">Language</string>
+    <string name="select_lan">Select Language</string>
+    <string name="pre_lan">Select your preferred language</string>
+    <string name="Log">Logout</string>
+    <string name="log_out">Logout from the app</string>
+    <string name="eng">English</string>
+    <string name="tr">Turkish</string>
+    <string name="log_sure" translatable="false">Are you sure you want to log out?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
+    <string name="no">No</string>
+</resources>

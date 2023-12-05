@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MovieScope" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#1E1D1D</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/blue</item>
+
+    </style>
+
+    <style name="AppTheme.AppBar" parent="Theme.MaterialComponents">
+        <item name="appBarLayoutStyle">
+            @style/Widget.MaterialComponents.ActionBar.PrimarySurface
+        </item>
+        <item name="colorPrimary">@color/md_theme_light_onSurface</item>
+        <item name="colorOnPrimary">@color/blue</item>
+        <item name="colorPrimaryContainer">#FFFFFF</item>
+    </style>
+
+    <style name="search">
+    <item name="android:background">#F4F6F6</item>
+    <item name="android:backgroundTint">#FEFEFE</item>
+
+</style>
+</resources>

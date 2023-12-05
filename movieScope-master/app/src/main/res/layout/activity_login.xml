@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.moviescope.auth.viewModel.LoginActivityViewModel" />
+
+        <import type="com.example.moviescope.screens.auth.login.Converter"></import>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screens.auth.login.LoginActivity">
+
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/AppTheme.AppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:title="@string/app_name"
+            app:titleCentered="true"
+            app:titleTextColor="#039BE5" />
+
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="63dp"
+            android:ems="10"
+            android:hint="@string/name_hint"
+            android:inputType="text"
+            android:text="@={viewModel.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topAppBar" />
+
+        <EditText
+            android:id="@+id/passEditText"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="27dp"
+            android:ems="10"
+            android:hint="@string/pass_hint"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="411dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="22dp"
+            android:backgroundTint="#039BE5"
+            android:onClick="@{() -> viewModel.onLoginFormSubmitted()}"
+            android:text="@string/login_text_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passEditText" />
+
+        <TextView
+            android:id="@+id/forgetPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="126dp"
+            android:layout_marginEnd="149dp"
+            android:onClick="@{() -> viewModel.navigateToForgetPassword()}"
+            android:text="@string/forget"
+            android:textColor="#1E88E5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.534" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
