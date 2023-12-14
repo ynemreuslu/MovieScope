@@ -2,12 +2,8 @@ package com.example.moviescope.screens.navigationBar.settings
 
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Entity
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,25 +12,23 @@ import android.widget.Toolbar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.view.SupportActionModeWrapper
 import androidx.core.content.ContextCompat
 import androidx.core.os.LocaleListCompat
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreferenceCompat
 import com.example.moviescope.R
-import com.example.moviescope.R.string
-import com.example.moviescope.databinding.ActivityEntryBinding
 import com.example.moviescope.screens.auth.login.LoginActivity
-
+import com.example.moviescope.service.AuthServices
 import com.google.android.material.appbar.AppBarLayout
-import com.google.firebase.auth.FirebaseAuth
-import java.util.Locale
+import com.google.android.material.appbar.MaterialToolbar
 
 
 class SettingsFragment : PreferenceFragmentCompat() {
-    private lateinit var auth: FirebaseAuth
+
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
 
@@ -80,6 +74,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     }
 
+
     private fun updateLocale(language: String) {
         val languagePreferences =
             requireContext().getSharedPreferences("language", Context.MODE_PRIVATE).edit()
@@ -108,8 +103,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             .setNegativeButton(R.string.no) { _, _ -> }
             .create()
 
-
-
         alertDialog.setOnShowListener {
             val positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
             positiveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
@@ -119,18 +112,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         alertDialog.show()
-
     }
 
     private fun navigateToEntryActivity() {
-        auth = FirebaseAuth.getInstance()
-        auth.signOut()
+        AuthServices.isUserOut()
         val intent = Intent(requireContext(), LoginActivity::class.java)
         startActivity(intent)
-
-
     }
 }
-
-
 

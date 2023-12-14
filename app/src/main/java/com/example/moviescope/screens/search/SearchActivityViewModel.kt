@@ -11,7 +11,8 @@ import com.example.moviescope.network.MovieApi
 import com.example.moviescope.utils.MovieApiConfig
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
+import java.lang.ref.WeakReference
+
 
 class SearchActivityViewModel : ViewModel() {
 
@@ -19,6 +20,11 @@ class SearchActivityViewModel : ViewModel() {
     val movieSearch: LiveData<List<Movie>> get() = _movieSearch
 
     private val movieApi = ApiClientBuilder.retrofitInstance.create(MovieApi::class.java)
+
+    private val _isMovieSelected = MutableLiveData<String>()
+    val isMovieSelected: LiveData<String> get() = _isMovieSelected
+
+    private var mWeakReference: WeakReference<SearchActivity> = WeakReference(null)
 
     fun getSearh(search: String) {
         val call = movieApi.getAllMovies(search, MovieApiConfig.API_KEY, "movie")
@@ -30,15 +36,29 @@ class SearchActivityViewModel : ViewModel() {
                         _movieSearch.value = movieResponse.Search
                     }
                 } else {
-                    Log.e("Search ViewModel", "API çağrısı başarısız")
+                    Log.e("Search ViewModel", "API call failed")
                 }
             }
 
             override fun onFailure(call: Call<MovieSearch>, t: Throwable) {
-                Log.e("Search View Model ", "API çağrısı başarısız", t)
+                Log.e("Search ViewModel", "API call failed", t)
             }
         })
     }
 
+    fun setClearButton() {
+        mWeakReference.get()?.setupClearButton()
+    }
 
+    fun setWeakReference(activity: SearchActivity) {
+        mWeakReference = WeakReference(activity)
+    }
+
+    fun onBackPress() {
+        mWeakReference.get()?.onBackPressedDispatcher?.onBackPressed()
+    }
+
+    fun movieSelected(imdId: String) {
+        _isMovieSelected.value = imdId
+    }
 }

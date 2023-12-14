@@ -35,11 +35,11 @@
     <string name="yes">Evet</string>
     <string name="cancel">Kapat</string>
     <string name="no">Hayır</string>
-    <string name="title">Ad</string>
-    <string name="actor">Aktör</string>
-    <string name="writer">Senarist</string>
-    <string name="director">Yönetmen</string>
-    <string name="year">Yıl</string>
+    <string name="title">Ad : </string>
+    <string name="actor">Aktör : </string>
+    <string name="writer">Senarist : </string>
+    <string name="director">Yönetmen : </string>
+    <string name="year">Yıl :</string>
     <string name="spiderman">Örümcek Adam</string>
     <string name="the_rings">Yüzüklerin Efendisi</string>
     <string name="email_valid">Geçerli bir e-posta adresi girin</string>
@@ -53,4 +53,6 @@
     <string name="reset_email_error">Şifre sıfırlama e-postası gönderilemedi</string>
     <string name="plase_email">Lütfen bir e-posta adresi girin</string>
     <string name="register">Kayıt Ol</string>
+    <string name="pass_lenght">Şifreniz en az 6 karakter uzunluğunda olmalıdır</string>
+    <string name="imd">IMD : </string>
 </resources>

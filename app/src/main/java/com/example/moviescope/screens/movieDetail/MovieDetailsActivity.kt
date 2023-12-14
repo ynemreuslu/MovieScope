@@ -1,11 +1,9 @@
 package com.example.moviescope.screens.movieDetail
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.moviescope.R
 import com.example.moviescope.databinding.ActivityMovieDetailsBinding
@@ -13,70 +11,76 @@ import com.example.moviescope.movieDetail.MovieDetailViewModel
 import com.example.moviescope.repo.MovieRepository
 import com.example.moviescope.room.MovieDatabase
 import com.example.moviescope.room.MovieModel
-import kotlinx.coroutines.launch
+
 
 
 class MovieDetailsActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMovieDetailsBinding
     private lateinit var movieDetailViewModel: MovieDetailViewModel
-    private lateinit var movieRepository: MovieRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        initializeViewModel()
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details)
+        binding.lifecycleOwner = this
 
         val imdId = intent.getStringExtra("imd")
-        imdId?.let { movieDetailViewModel.getDetailsMovies(it) }
 
-        observeViewModel()
-        setupBackButton()
-        setupFavoritesButton()
-    }
-
-    private fun initializeViewModel() {
-        val dao = MovieDatabase.getDatabase(this).getMovieDao()
-        movieRepository = MovieRepository(dao)
+        val dao = MovieDatabase.getInstance(this).movieDao()
+        val movieRepository = MovieRepository(dao)
         val viewModelFactory = MovieDetailsViewModelFactory(movieRepository)
         movieDetailViewModel =
-            ViewModelProvider(this, viewModelFactory).get(MovieDetailViewModel::class.java)
-    }
+            ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
 
-    private fun observeViewModel() {
+        imdId?.let { movieDetailViewModel.getDetailsMovies(it) }
+
         movieDetailViewModel.movieDetails.observe(this) { movieDetails ->
-            if (movieDetails != null) {
-                binding.movieDetailsPoster.let { imageView ->
-                    Glide.with(this).load(movieDetails.Poster).into(imageView)
-                }
+            binding.movie = movieDetails
+            Glide.with(this).load(movieDetails.Poster).into(binding.movieDetailsPoster)
 
-                binding.movieDetailsActor.text =
-                    "${getString(R.string.actor)} : ${movieDetails.Actors}"
-                binding.movieDetailsTitle.text =
-                    "${getString(R.string.title)} : ${movieDetails.Title}"
-                binding.movieDetailsDirector.text =
-                    "${getString(R.string.director)} : ${movieDetails.Director}"
-                binding.movieDetailsWriter.text =
-                    "${getString(R.string.writer)} : ${movieDetails.Writer}"
-                binding.movieDetailsIMD.text = "IMD : ${movieDetails.imdbRating}"
-                binding.movieDetailsYear.text = "${getString(R.string.year)} :${movieDetails.Year}"
-            } else {
-                Log.e("MovieDetailsActivity", "Movie not found")
+            val movie = MovieModel(
+                imdId = movieDetails.imdbID,
+                poster = movieDetails.Poster,
+                title = movieDetails.Title,
+                year = movieDetails.Year
+            )
+
+            updateLikeButton(movie)
+            binding.favoritesButton.setOnClickListener {
+                insertMovie(movie)
+                setButtonAdd()
+                binding.favoritesButton.setImageResource(R.drawable.ic_favorite)
             }
         }
+
+        onBackPress()
     }
 
-    private fun setupBackButton() {
-        binding.topAppBar.setNavigationOnClickListener {
-            this.onBackPressedDispatcher.onBackPressed()
+    private fun onBackPress() {
+        binding.onBackPress.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
-    private fun setupFavoritesButton() {
-        binding.favoritesButton.setOnClickListener {
-            movieDetailViewModel.movieInsert()
+    private fun insertMovie(movie: MovieModel) {
+        movieDetailViewModel.movieInsert(movie)
+    }
+
+    fun setButtonAdd() {
+        binding.favoritesButton.setImageResource(R.drawable.ic_favorite)
+    }
+
+    fun setButtonRemove() {
+        binding.favoritesButton.setImageResource(R.drawable.ic_favorite_border)
+    }
+
+    private fun updateLikeButton(movie: MovieModel) {
+        val isMovieExists =
+            movieDetailViewModel.favoriteMovies.value?.any { it.imdId == movie.imdId } == true
+        if (isMovieExists) {
             binding.favoritesButton.setImageResource(R.drawable.ic_favorite)
+        } else {
+            binding.favoritesButton.setImageResource(R.drawable.ic_favorite_border)
         }
     }
 }

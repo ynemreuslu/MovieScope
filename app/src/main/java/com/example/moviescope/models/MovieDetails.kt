@@ -23,7 +23,7 @@ data class MovieDetails(
     val imdbID: String,
     val imdbRating: String,
     val imdbVotes: String,
-    val totalSeasons: String,
-    )
+    val totalSeasons: String
+)
 
 

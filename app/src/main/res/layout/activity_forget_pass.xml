@@ -1,60 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".auth.ForgetPassActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topAppBar"
-        style="@style/AppTheme.AppBar"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.moviescope.screens.auth.forget.ForgetPassViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:title="@string/app_name"
-        app:titleCentered="true"
-        app:titleTextColor="#039BE5" />
+        android:layout_height="match_parent"
+        tools:context=".screens.auth.forget.ForgetPassActivity">
 
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:text="@string/forget"
-        android:textAlignment="center"
-        android:textColor="@color/blue"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topAppBar" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/AppTheme.AppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:title="@string/app_name"
+            app:titleCentered="true"
+            app:titleTextColor="#039BE5" />
 
-    <EditText
-        android:id="@+id/emailEditText"
-        android:layout_width="394dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="23dp"
-        android:hint="@string/e_mail"
-        app:layout_constraintBottom_toTopOf="@+id/resetButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:text="@string/forget"
+            android:textAlignment="center"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topAppBar" />
 
-    <Button
-        android:id="@+id/resetButton"
-        android:layout_width="411dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:backgroundTint="#1E88E5"
-        android:text="@string/reset_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="394dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="23dp"
+            android:hint="@string/e_mail"
+            android:text="@={viewModel.email}"
+            app:layout_constraintBottom_toTopOf="@+id/resetButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="411dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:backgroundTint="#1E88E5"
+            android:onClick="@{() -> viewModel.onSendPasswordResetEmail()}"
+            android:text="@string/reset_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

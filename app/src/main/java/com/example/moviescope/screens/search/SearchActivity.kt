@@ -4,54 +4,52 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.moviescope.R
 import com.example.moviescope.databinding.ActivitySearchBinding
-import com.example.moviescope.models.Movie
-import com.example.moviescope.models.MovieDetails
 import com.example.moviescope.screens.movieDetail.MovieDetailsActivity
 
 class SearchActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivitySearchBinding
     private lateinit var searchViewModel: SearchActivityViewModel
     private lateinit var searchAdapter: SearchAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySearchBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        binding.clearButton.visibility = View.GONE
-        setupBackPress()
-        setupClearButton()
-        setupClearButtonVisibility()
-        showSoftKeyboard(binding.searchEditText)
-        setupRecyclerView()
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
 
         searchViewModel = ViewModelProvider(this)[SearchActivityViewModel::class.java]
+        searchViewModel.setWeakReference(this)
 
+        binding.viewModel = searchViewModel
+        binding.clearButton.visibility = View.GONE
+        showSoftKeyboard(binding.searchEditText)
+
+        searchViewModel.getSearh(binding.searchEditText.text.toString())
         searchViewModel.movieSearch.observe(this) { movies ->
             searchAdapter.submitList(movies)
         }
 
-        binding.searchRecyclerview.adapter = searchAdapter
-        binding.searchRecyclerview.layoutManager = LinearLayoutManager(this)
-    }
-
-    private fun setupBackPress() {
-        binding.onBackPress.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+        searchAdapter = SearchAdapter { imdId ->
+            handleMovieItemClick(imdId)
         }
-    }
 
-    private fun setupClearButton() {
+        setupRecyclerView()
         setupClearButtonVisibility()
-        binding.clearButton.setOnClickListener {
-            binding.searchEditText.text.clear()
-        }
+    }
+
+    fun setupBackPress() {
+        onBackPressedDispatcher.onBackPressed()
+    }
+
+    fun setupClearButton() {
+        setupClearButtonVisibility()
+        binding.searchEditText.text.clear()
     }
 
     private fun showSoftKeyboard(view: View) {
@@ -61,7 +59,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupClearButtonVisibility() {
+    fun setupClearButtonVisibility() {
         binding.searchEditText.addTextChangedListener {
             binding.clearButton.visibility =
                 if (binding.searchEditText.text.isNotEmpty()) View.VISIBLE else View.GONE
@@ -70,14 +68,20 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        searchAdapter = SearchAdapter { movie ->
-            val intent = Intent(this, MovieDetailsActivity::class.java)
-            intent.putExtra(
-                "imd",
-                movie.imdbID
-            )
-            startActivity(intent)
+        binding.searchRecyclerview.apply {
+            layoutManager = LinearLayoutManager(this@SearchActivity)
+            adapter = searchAdapter
         }
     }
 
+    private fun handleMovieItemClick(imdId: String) {
+        navigateToMovieDetails(imdId)
+        searchViewModel.movieSelected(imdId)
+    }
+
+    private fun navigateToMovieDetails(imdId: String) {
+        val intent = Intent(this, MovieDetailsActivity::class.java)
+        intent.putExtra("imd", imdId)
+        startActivity(intent)
+    }
 }

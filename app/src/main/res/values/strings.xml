@@ -20,11 +20,12 @@
     <string name="reset_button">Reset Password</string>
     <string name="home">Home</string>
     <string name="fav">Favorites</string>
-    <string name="title">Title</string>
-    <string name="actor">Actor</string>
-    <string name="writer">Writer</string>
-    <string name="director">Director</string>
-    <string name="year">Year</string>
+    <string name="title">Title : </string>
+    <string name="actor">Actor : </string>
+    <string name="writer">Writer : </string>
+    <string name="director">Director : </string>
+    <string name="year">Year : </string>
+    <string name="imd">IMD : </string>
     <string name="spiderman">Spider-Man</string>
     <string name="the_rings">The Lord of the rings</string>
     <string name="email_valid">Enter valid email address</string>
@@ -38,4 +39,5 @@
     <string name="reset_email_error">Password reset email could not be sent</string>
     <string name="plase_email">Please enter an email address</string>
     <string name="register">Register</string>
+    <string name="pass_lenght">Your password must be at least 6 characters long</string>
 </resources>

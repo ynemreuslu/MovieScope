@@ -1,97 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".screens.search.SearchActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.moviescope.screens.search.SearchActivityViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/second_constraint_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        app:layout_constraintBottom_toTopOf="@+id/searchRecyclerview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".screens.search.SearchActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/search"
-            android:layout_width="411dp"
-            android:layout_height="54dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/second_constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            app:layout_constraintBottom_toTopOf="@+id/searchRecyclerview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.appcompat.widget.Toolbar>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/search"
+                android:layout_width="411dp"
+                android:layout_height="54dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/search_edit_text"
-            style="@style/search"
-            android:layout_width="317dp"
-            android:layout_height="28dp"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginVertical="12dp"
-            android:layout_marginEnd="29dp"
-            android:background="@android:color/transparent"
-            android:backgroundTint="@color/white"
-            android:drawableStart="@drawable/baseline_search_24"
-            android:drawablePadding="4dp"
-            android:drawableTint="#039BE5"
-            android:hint="@string/enter_search"
-            android:maxLines="1"
-            android:padding="4dp"
-            android:textColor="@color/blue"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            </androidx.appcompat.widget.Toolbar>
+
+            <EditText
+                android:id="@+id/search_edit_text"
+                style="@style/search"
+                android:layout_width="317dp"
+                android:layout_height="28dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="12dp"
+                android:layout_marginEnd="29dp"
+                android:background="@android:color/transparent"
+                android:backgroundTint="@color/white"
+                android:drawableStart="@drawable/baseline_search_24"
+                android:drawablePadding="4dp"
+                android:drawableTint="#039BE5"
+                android:hint="@string/enter_search"
+                android:maxLines="1"
+                android:padding="4dp"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/onBackPress"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.461"
+                tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
+
+            <ImageButton
+                android:id="@+id/clear_button"
+                style="@style/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:onClick="@{() -> viewModel.setClearButton()}"
+                android:src="@drawable/baseline_cancel_24"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/search_edit_text"
+                app:layout_constraintEnd_toEndOf="@id/search_edit_text"
+                app:layout_constraintTop_toTopOf="@id/search_edit_text"
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+            <ImageButton
+                android:id="@+id/onBackPress"
+                style="@style/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:onClick="@{() -> viewModel.onBackPress()}"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/toolbar"
+                app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchRecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/onBackPress"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.461"
-            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields" />
-
-        <ImageButton
-            android:id="@+id/clear_button"
-            style="@style/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:src="@drawable/baseline_cancel_24"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/search_edit_text"
-            app:layout_constraintEnd_toEndOf="@id/search_edit_text"
-            app:layout_constraintTop_toTopOf="@id/search_edit_text"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
-
-        <ImageButton
-            android:id="@+id/onBackPress"
-            style="@style/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:srcCompat="@drawable/baseline_keyboard_arrow_left_24" />
+            app:layout_constraintTop_toBottomOf="@id/second_constraint_layout" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchRecyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/second_constraint_layout" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
+</layout>
 
 
 

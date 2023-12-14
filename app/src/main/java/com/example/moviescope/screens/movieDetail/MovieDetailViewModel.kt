@@ -11,21 +11,30 @@ import com.example.moviescope.network.ApiClientBuilder
 import com.example.moviescope.network.MovieApi
 import com.example.moviescope.repo.MovieRepository
 import com.example.moviescope.room.MovieModel
+import com.example.moviescope.screens.movieDetail.MovieDetailsActivity
 import com.example.moviescope.utils.MovieApiConfig
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.ref.WeakReference
 
-class MovieDetailViewModel(val movieRepo: MovieRepository) : ViewModel() {
+class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewModel() {
 
     private val _movieDetails = MutableLiveData<MovieDetails>()
     val movieDetails: LiveData<MovieDetails> get() = _movieDetails
 
-    private val _insertSuccess = MutableLiveData<Boolean>()
-    val insertSuccess: LiveData<Boolean> get() = _insertSuccess
-
     val movieApi = ApiClientBuilder.retrofitInstance.create(MovieApi::class.java)
+
+    val getFavMovies: MutableLiveData<List<MovieModel>> = MutableLiveData()
+
+    private val _favoriteMovies = MutableLiveData<List<MovieModel>>()
+    val favoriteMovies: LiveData<List<MovieModel>> get() = _favoriteMovies
+    var mWeakReference: WeakReference<MovieDetailsActivity> = WeakReference(null)
+
+    init {
+        setMovie()
+    }
 
     fun getDetailsMovies(imdId: String) {
         val call = movieApi.getDetailsMovies(imdId, MovieApiConfig.API_KEY)
@@ -42,28 +51,20 @@ class MovieDetailViewModel(val movieRepo: MovieRepository) : ViewModel() {
         })
     }
 
-    fun movieInsert() {
-        viewModelScope.launch {
-            _movieDetails.value?.let { movieDetails ->
-                try {
-                    movieRepo.movieInsert(
-                        MovieModel(
-                            moviePoster = movieDetails.Poster.orEmpty(),
-                            movieTitle = movieDetails.Title.orEmpty(),
-                            movieYear = movieDetails.Year.orEmpty()
-                        )
-                    )
-                    _insertSuccess.value = true
-                } catch (e: Exception) {
-                    Log.e("Movie Details ViewModel", "Movie insert failed", e)
-                    _insertSuccess.value = false
-                }
+    fun movieInsert(movie: MovieModel) {
+        val currentFavoriteMovies = _favoriteMovies.value
+        if (currentFavoriteMovies?.none { it.imdId == movie.imdId } == true) {
+            viewModelScope.launch {
+                movieRepository.movieInsert(movie)
+                setMovie()
             }
         }
     }
 
+    private fun setMovie() {
+        viewModelScope.launch {
+            _favoriteMovies.value = movieRepository.getMovieAll()
+            getFavMovies.postValue(_favoriteMovies.value)
+        }
+    }
 }
-
-
-
-

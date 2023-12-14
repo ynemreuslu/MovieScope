@@ -1,115 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".screens.auth.login.LoginActivity">
+    <data>
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topAppBar"
-        style="@style/AppTheme.AppBar"
+        <variable
+            name="viewModel"
+            type="com.example.moviescope.screens.auth.login.LoginActivityViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:elevation="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:title="@string/app_name"
-        app:titleCentered="true"
-        app:titleTextColor="#039BE5" />
+        android:layout_height="match_parent"
+        tools:context=".screens.auth.login.LoginActivity">
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="340dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="63dp"
-        android:ems="10"
-        android:hint="@string/e_mail"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topAppBar" />
-
-    <RelativeLayout
-        android:id="@+id/passwordLayout"
-        android:layout_width="340dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="27dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/AppTheme.AppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:title="@string/app_name"
+            app:titleCentered="true"
+            app:titleTextColor="#039BE5" />
 
         <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="30dp"
+            android:id="@+id/email"
+            android:layout_width="340dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="63dp"
             android:ems="10"
-            android:hint="@string/pass_hint"
-            android:inputType="textPassword" />
+            android:hint="@string/e_mail"
+            android:inputType="text"
+            android:text="@={viewModel.email}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topAppBar" />
 
-        <CheckBox
-            android:id="@+id/passwordVisibility"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
-            android:background="?android:selectableItemBackground"
-            android:button="@drawable/baseline_remove_red_eye_24"
-            android:buttonTint="#2196F3"
-            android:src="@drawable/baseline_remove_red_eye_24" />
+        <RelativeLayout
+            android:id="@+id/passwordLayout"
+            android:layout_width="340dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="27dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email">
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="30dp"
+                android:ems="10"
+                android:hint="@string/pass_hint"
+                android:inputType="textPassword"
+                android:text="@={viewModel.password}" />
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="380dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="#039BE5"
-        android:text="@string/login_text_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />
+            <CheckBox
+                android:id="@+id/passwordVisibility"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:checked="@={viewModel.visibilityPassWord}"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:onClick="@{() -> viewModel.onPasswordVisibilityClick()}"
+                android:background="?android:selectableItemBackground"
+                android:button="@drawable/baseline_remove_red_eye_24"
+                android:buttonTint="#2196F3"
+                android:src="@drawable/baseline_remove_red_eye_24" />
 
-    <TextView
-        android:id="@+id/forgetPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="126dp"
-        android:layout_marginEnd="126dp"
-        android:text="@string/forget"
-        android:textColor="#1E88E5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        app:layout_constraintVertical_bias="0.062" />
+        </RelativeLayout>
 
-    <TextView
-        android:id="@+id/register"
-        android:layout_width="89dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="183dp"
-        android:layout_marginEnd="176dp"
-        android:layout_marginBottom="44dp"
-        android:text="@string/register"
-        android:textAlignment="center"
-        android:textColor="@color/blue"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.594"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="380dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#039BE5"
+            android:onClick="@{() -> viewModel.onLoginButton()}"
+            android:text="@string/login_text_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/forgetPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="126dp"
+            android:layout_marginEnd="126dp"
+            android:onClick="@{() -> viewModel.onForgetPasswordClick()}"
+            android:text="@string/forget"
+            android:textColor="#1E88E5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginButton"
+            app:layout_constraintVertical_bias="0.062" />
+
+        <TextView
+            android:id="@+id/register"
+            android:layout_width="89dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="183dp"
+            android:layout_marginEnd="176dp"
+            android:layout_marginBottom="44dp"
+            android:onClick="@{() -> viewModel.onRegisterClick()}"
+            android:text="@string/register"
+            android:textAlignment="center"
+            android:textColor="@color/blue"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.594"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

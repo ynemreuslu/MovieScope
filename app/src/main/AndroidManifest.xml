@@ -24,10 +24,10 @@
             android:name=".screens.movieDetail.MovieDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".auth.RegisterActivity"
+            android:name=".screens.auth.register.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".auth.ForgetPassActivity"
+            android:name=".screens.auth.forget.ForgetPassActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

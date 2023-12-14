@@ -16,6 +16,7 @@ interface MovieApi {
 
     @GET("/")
     fun getDetailsMovies(
-        @Query("i") imdId: String, @Query("apikey") apiKey: String
+        @Query("i") imdId: String,
+        @Query("apikey") apiKey: String
     ): Call<MovieDetails>
 }
