@@ -1,4 +1,4 @@
-![image](https://github.com/ynemreuslu/MovieScope/assets/70417221/d8ae2dc7-096b-494f-9b18-e2bd1e003569)![image](https://github.com/ynemreuslu/MovieScope/assets/70417221/127d3656-c06f-4415-8c67-55180c8c5f77)![image](https://github.com/ynemreuslu/MovieScope/assets/70417221/c92e2307-16b7-4827-9b13-5ea8bc3931f8)![image](https://github.com/ynemreuslu/MovieScope/assets/70417221/378bd3e1-41c9-4bc4-a97a-ae7b5ac32cc4)# MovieScope
+MovieScope
 
 MovieScope is an Android application that provides an enjoyable movie browsing experience using modern technologies.
 
