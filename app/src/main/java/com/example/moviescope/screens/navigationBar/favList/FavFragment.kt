@@ -37,13 +37,15 @@ class FavFragment : Fragment() {
 
         favAdapter = FavAdapter(favFragmentViewModel)
 
-        binding.movieFavRec.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = favAdapter
-        }
 
         favFragmentViewModel.getFavMovies.observe(viewLifecycleOwner) {
             favAdapter.submitList(it)
+        }
+
+
+        binding.movieFavRec.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = favAdapter
         }
     }
 }

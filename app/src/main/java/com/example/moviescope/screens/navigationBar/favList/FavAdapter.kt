@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.moviescope.R
 import com.example.moviescope.databinding.FavItemBinding
 import com.example.moviescope.diff.DiffCallBack
 import com.example.moviescope.room.MovieModel
@@ -34,7 +33,7 @@ class FavAdapter(private val favFragmentViewModel: FavFragmentViewModel) :
 
             binding.favImageButton.setOnClickListener {
                 favFragmentViewModel.movieDelete(movie)
-                binding.favImageButton.setImageResource(R.drawable.ic_favorite_border)
+                submitList(currentList)
             }
         }
     }

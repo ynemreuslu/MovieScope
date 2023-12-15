@@ -11,13 +11,13 @@ import com.example.moviescope.network.ApiClientBuilder
 import com.example.moviescope.network.MovieApi
 import com.example.moviescope.repo.MovieRepository
 import com.example.moviescope.room.MovieModel
-import com.example.moviescope.screens.movieDetail.MovieDetailsActivity
+
 import com.example.moviescope.utils.MovieApiConfig
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.ref.WeakReference
+
 
 class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewModel() {
 
@@ -30,7 +30,7 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
 
     private val _favoriteMovies = MutableLiveData<List<MovieModel>>()
     val favoriteMovies: LiveData<List<MovieModel>> get() = _favoriteMovies
-    var mWeakReference: WeakReference<MovieDetailsActivity> = WeakReference(null)
+
 
     init {
         setMovie()
@@ -59,12 +59,14 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
                 setMovie()
             }
         }
+
     }
 
-    private fun setMovie() {
+    fun setMovie() {
         viewModelScope.launch {
             _favoriteMovies.value = movieRepository.getMovieAll()
             getFavMovies.postValue(_favoriteMovies.value)
         }
     }
+
 }

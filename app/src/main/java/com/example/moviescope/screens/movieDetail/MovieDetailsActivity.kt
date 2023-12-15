@@ -13,7 +13,6 @@ import com.example.moviescope.room.MovieDatabase
 import com.example.moviescope.room.MovieModel
 
 
-
 class MovieDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailsBinding
@@ -29,8 +28,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         val dao = MovieDatabase.getInstance(this).movieDao()
         val movieRepository = MovieRepository(dao)
         val viewModelFactory = MovieDetailsViewModelFactory(movieRepository)
-        movieDetailViewModel =
-            ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
+        movieDetailViewModel = ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
 
         imdId?.let { movieDetailViewModel.getDetailsMovies(it) }
 
@@ -46,9 +44,9 @@ class MovieDetailsActivity : AppCompatActivity() {
             )
 
             updateLikeButton(movie)
+
             binding.favoritesButton.setOnClickListener {
                 insertMovie(movie)
-                setButtonAdd()
                 binding.favoritesButton.setImageResource(R.drawable.ic_favorite)
             }
         }
@@ -66,17 +64,8 @@ class MovieDetailsActivity : AppCompatActivity() {
         movieDetailViewModel.movieInsert(movie)
     }
 
-    fun setButtonAdd() {
-        binding.favoritesButton.setImageResource(R.drawable.ic_favorite)
-    }
-
-    fun setButtonRemove() {
-        binding.favoritesButton.setImageResource(R.drawable.ic_favorite_border)
-    }
-
     private fun updateLikeButton(movie: MovieModel) {
-        val isMovieExists =
-            movieDetailViewModel.favoriteMovies.value?.any { it.imdId == movie.imdId } == true
+        val isMovieExists = movieDetailViewModel.favoriteMovies.value?.any { it.imdId == movie.imdId } == true
         if (isMovieExists) {
             binding.favoritesButton.setImageResource(R.drawable.ic_favorite)
         } else {
