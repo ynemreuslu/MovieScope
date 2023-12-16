@@ -33,6 +33,7 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
 
 
     init {
+
         setMovie()
     }
 
@@ -62,10 +63,20 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
 
     }
 
+    fun movieDelete(movie: MovieModel) {
+        viewModelScope.launch {
+            movieRepository.movieDelete(movie)
+            setMovie()
+        }
+    }
+
+
     fun setMovie() {
         viewModelScope.launch {
-            _favoriteMovies.value = movieRepository.getMovieAll()
-            getFavMovies.postValue(_favoriteMovies.value)
+            val updatedFavoriteMovies = movieRepository.getMovieAll()
+            Log.d("MovieDetailViewModel", "Updated favorite movies: $updatedFavoriteMovies")
+            _favoriteMovies.value = updatedFavoriteMovies
+            getFavMovies.postValue(updatedFavoriteMovies)
         }
     }
 

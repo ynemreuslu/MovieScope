@@ -5,6 +5,8 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
+import com.example.moviescope.models.Movie
 
 @Dao
 interface MovieDao {
@@ -15,8 +17,7 @@ interface MovieDao {
     @Delete
     suspend fun movieDelete(movie: MovieModel)
 
-    @Query("SELECT * FROM movie WHERE imdId=:imdId")
-    suspend fun getMovieByImdId(imdId: String): List<MovieModel>
+
 
     @Query("SELECT * FROM movie")
     suspend fun getMovieAll(): List<MovieModel>

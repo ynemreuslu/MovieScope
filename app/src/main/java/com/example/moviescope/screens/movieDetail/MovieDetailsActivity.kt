@@ -1,6 +1,7 @@
 package com.example.moviescope.screens.movieDetail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -28,9 +29,12 @@ class MovieDetailsActivity : AppCompatActivity() {
         val dao = MovieDatabase.getInstance(this).movieDao()
         val movieRepository = MovieRepository(dao)
         val viewModelFactory = MovieDetailsViewModelFactory(movieRepository)
-        movieDetailViewModel = ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
+        movieDetailViewModel =
+            ViewModelProvider(this, viewModelFactory)[MovieDetailViewModel::class.java]
 
         imdId?.let { movieDetailViewModel.getDetailsMovies(it) }
+
+        var isLike = false
 
         movieDetailViewModel.movieDetails.observe(this) { movieDetails ->
             binding.movie = movieDetails
@@ -62,10 +66,12 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     private fun insertMovie(movie: MovieModel) {
         movieDetailViewModel.movieInsert(movie)
+        Log.d("MovieDetailsActivity", "Inserting movie: $movie")
     }
 
     private fun updateLikeButton(movie: MovieModel) {
-        val isMovieExists = movieDetailViewModel.favoriteMovies.value?.any { it.imdId == movie.imdId } == true
+        val isMovieExists =
+            movieDetailViewModel.favoriteMovies.value?.any { it.imdId == movie.imdId } == true
         if (isMovieExists) {
             binding.favoritesButton.setImageResource(R.drawable.ic_favorite)
         } else {

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviescope.databinding.FragmentFavBinding
 import com.example.moviescope.repo.MovieRepository
 import com.example.moviescope.room.MovieDatabase
-
+import com.example.moviescope.screens.navigationBar.favList.adapter.FavAdapter
 
 
 class FavFragment : Fragment() {
@@ -38,9 +38,12 @@ class FavFragment : Fragment() {
         favAdapter = FavAdapter(favFragmentViewModel)
 
 
-        favFragmentViewModel.getFavMovies.observe(viewLifecycleOwner) {
-            favAdapter.submitList(it)
+        favFragmentViewModel.getFavMovies.observe(viewLifecycleOwner) { favMovie ->
+
+            favAdapter.submitList(favMovie)
         }
+
+
 
 
         binding.movieFavRec.apply {
@@ -48,4 +51,5 @@ class FavFragment : Fragment() {
             adapter = favAdapter
         }
     }
+
 }
