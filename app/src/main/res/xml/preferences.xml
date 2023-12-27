@@ -4,7 +4,8 @@
     app:fragment="com.example.SettingsFragment"
     app:layout="@layout/fragment_settings">
 
-    <PreferenceCategory app:layout="@layout/fragment_settings" />
+    <PreferenceCategory
+        app:layout="@layout/fragment_settings" />
 
     <PreferenceCategory android:title="@string/theme">
 
