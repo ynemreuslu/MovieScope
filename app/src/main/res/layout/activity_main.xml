@@ -9,35 +9,31 @@
             type="com.example.moviescope.MainActivityViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".MainActivity">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav"
-            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-            android:layout_width="410dp"
-            android:layout_height="62dp"
-            android:background="@color/blue"
-            app:elevation="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_nav" />
-
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
             android:name="com.example.moviescope.navigationBar.movieList.MovieListFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="3dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav"
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            app:elevation="0dp"
+            app:menu="@menu/bottom_nav" />
+    </LinearLayout>
 </layout>

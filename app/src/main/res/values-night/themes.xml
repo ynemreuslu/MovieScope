@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.MovieScope" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">#1E1D1D</item>
@@ -32,4 +32,8 @@
     <style name="ımageButton" parent="Widget.AppCompat.ImageButton">
         <item name="android:background">@color/md_theme_light_onSurface</item>
     </style>
+
+
+
+
 </resources>
