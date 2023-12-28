@@ -5,6 +5,7 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimaryContainer">@color/blue</item>
 
+
     </style>
 
     <style name="AppTheme.AppBar" parent="Theme.MaterialComponents">
@@ -32,6 +33,7 @@
     <style name="ımageButton" parent="Widget.AppCompat.ImageButton">
         <item name="android:background">@color/md_theme_light_onSurface</item>
     </style>
+
 
 
 

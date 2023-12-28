@@ -24,4 +24,7 @@
     <color name="md_theme_dark_onSurface">#E6E1E5</color>
     <color name="md_theme_dark_surfaceVariant">#49454F</color>
 
+    <color name="ic_launcher_foreground">#FFFFFF</color>
+    <color name="ic_launcher_background">#FFBB00</color>
+
 </resources>
