@@ -17,10 +17,10 @@ abstract class MovieDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): MovieDatabase =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDataBase(context).also { INSTANCE = it }
+                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
 
-        private fun buildDataBase(context: Context) =
+        private fun buildDatabase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext,
                 MovieDatabase::class.java,

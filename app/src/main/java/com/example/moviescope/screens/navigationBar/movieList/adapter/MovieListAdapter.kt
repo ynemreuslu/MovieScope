@@ -41,7 +41,7 @@ class MovieListAdapter(private val onClickListener: (String) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: Movie) {
-            Glide.with(binding.root.context).load(movie.Poster).into(binding.moviePoster)
+            Glide.with(binding.root.context).load(movie.poster).into(binding.moviePoster)
             binding.movie = movie
 
             binding.root.setOnClickListener {

@@ -6,7 +6,12 @@
         <item name="windowSplashScreenAnimatedIcon">@mipmap/movie_scope</item>
         <item name="windowSplashScreenAnimationDuration">200</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.MovieScope</item>
+<<<<<<< HEAD
 
 
     </style>
+=======
+    </style>
+
+>>>>>>> d6335c8 (The code has been formatted, and the Retrofit library has been fixed.)
 </resources>

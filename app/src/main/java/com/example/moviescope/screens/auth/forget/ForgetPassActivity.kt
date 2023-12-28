@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moviescope.databinding.ActivityForgetPassBinding
 import com.example.moviescope.screens.auth.login.LoginActivity
 
-
-
 class ForgetPassActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityForgetPassBinding

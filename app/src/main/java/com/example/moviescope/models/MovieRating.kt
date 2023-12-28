@@ -1,6 +1,8 @@
 package com.example.moviescope.models
 
+import com.google.gson.annotations.SerializedName
+
 data class MovieRating(
-    val Source: String,
-    val Value: String
+    @SerializedName("Source") val source: String,
+    @SerializedName("Value") val value: String
 )

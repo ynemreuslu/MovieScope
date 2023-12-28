@@ -41,7 +41,7 @@ class MovieListViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val movieResponse = response.body()
                     if (movieResponse != null) {
-                        liveData.value = movieResponse.Search
+                        liveData.value = movieResponse.search
                     }
                 } else {
                     Log.e("MovieViewModel", "API call failed")

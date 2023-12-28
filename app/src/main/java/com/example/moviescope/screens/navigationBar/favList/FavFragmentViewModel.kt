@@ -30,4 +30,3 @@ class FavFragmentViewModel(private val movieRepository: MovieRepository) : ViewM
         }
     }
 }
-

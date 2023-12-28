@@ -29,8 +29,8 @@ class SearchAdapter(private val onSearchClick: (String) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: Movie) {
-            binding.searchMovieTitle.text = movie.Title
-            binding.searchMovieYear.text = movie.Year
+            binding.searchMovieTitle.text = movie.title
+            binding.searchMovieYear.text = movie.year
 
             binding.root.setOnClickListener {
                 onSearchClick(movie.imdbID)

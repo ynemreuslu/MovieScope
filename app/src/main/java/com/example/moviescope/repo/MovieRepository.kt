@@ -13,7 +13,6 @@ class MovieRepository(private val movieDao: MovieDao) {
         movieDao.movieDelete(movie)
     }
 
-
     suspend fun getMovieAll(): List<MovieModel> {
         return movieDao.getMovieAll()
     }

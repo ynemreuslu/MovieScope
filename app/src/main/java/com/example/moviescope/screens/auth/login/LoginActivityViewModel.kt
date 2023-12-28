@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.getString
 import androidx.lifecycle.ViewModel
 import com.example.moviescope.R
-import com.example.moviescope.service.AuthServices
+import com.example.moviescope.service.AuthenticationManager
 import java.lang.ref.WeakReference
 
 
@@ -18,11 +18,13 @@ class LoginActivityViewModel : ViewModel() {
 
     fun onLoginButton() {
         if (validate(email, password)) {
-            AuthServices.loginUser(email, password) { isSuccess ->
-                if (isSuccess) mWeakReference.get()?.navigateToMainActivity()
-                else showToast(R.string.login_faild)
+            AuthenticationManager.login(email, password) { isSuccess ->
+                if (isSuccess) {
+                    mWeakReference.get()?.navigateToMainActivity()
+                } else {
+                    showToast(R.string.login_faild)
+                }
             }
-
         }
     }
 
@@ -63,13 +65,12 @@ class LoginActivityViewModel : ViewModel() {
     }
 
     fun onUserStart() {
-        if (AuthServices.isUserStart()) mWeakReference.get()?.navigateToMainActivity()
-
-
+        if (AuthenticationManager.isUserStart()) {
+            mWeakReference.get()?.navigateToMainActivity()
+        }
     }
 
     fun setWeakReference(activity: LoginActivity) {
         mWeakReference = WeakReference(activity)
     }
-
 }

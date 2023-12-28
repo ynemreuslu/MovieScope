@@ -32,24 +32,18 @@ class FavFragment : Fragment() {
         val dao = MovieDatabase.getInstance(requireContext()).movieDao()
         movieRepository = MovieRepository(dao)
         val viewModelFactory = FavFragmentViewModelFactory(movieRepository)
-        favFragmentViewModel =
-            ViewModelProvider(this, viewModelFactory)[FavFragmentViewModel::class.java]
+        favFragmentViewModel = ViewModelProvider(this, viewModelFactory)[FavFragmentViewModel::class.java]
 
         favAdapter = FavAdapter(favFragmentViewModel)
 
-
         favFragmentViewModel.getFavMovies.observe(viewLifecycleOwner) { favMovie ->
-
             favAdapter.submitList(favMovie)
         }
-
-
-
 
         binding.movieFavRec.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = favAdapter
         }
     }
-
 }
+

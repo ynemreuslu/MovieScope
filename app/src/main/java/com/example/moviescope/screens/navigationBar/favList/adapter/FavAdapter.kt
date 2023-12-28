@@ -13,8 +13,7 @@ import com.example.moviescope.screens.navigationBar.favList.FavFragmentViewModel
 
 class FavAdapter(private val favFragmentViewModel: FavFragmentViewModel) :
     ListAdapter<MovieModel, FavAdapter.FavViewHolder>(
-        DiffCallBack<MovieModel>(
-            itemTheSame = { newItem, oldItem -> newItem.id == oldItem.id },
+        DiffCallBack<MovieModel>(itemTheSame = { newItem, oldItem -> newItem.id == oldItem.id },
             contentsTheSame = { newItem, oldItem -> newItem == oldItem })
     ) {
 

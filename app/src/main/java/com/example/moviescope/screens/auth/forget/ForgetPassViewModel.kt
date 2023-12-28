@@ -4,16 +4,17 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import com.example.moviescope.R
-import com.example.moviescope.service.AuthServices
+import com.example.moviescope.service.AuthenticationManager
 import java.lang.ref.WeakReference
 
 class ForgetPassViewModel : ViewModel() {
+
     var email: String = ""
     private var weakReference: WeakReference<ForgetPassActivity?> = WeakReference(null)
 
     fun onSendPasswordResetEmail() {
         if (email.isNotEmpty()) {
-            AuthServices.sendPasswordResetEmail(email)
+            AuthenticationManager.sendPasswordResetEmail(email)
             showToast(R.string.reset_email)
             weakReference.get()?.navigateToLogin()
         } else {

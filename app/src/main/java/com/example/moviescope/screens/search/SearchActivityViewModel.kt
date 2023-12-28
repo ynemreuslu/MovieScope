@@ -33,7 +33,7 @@ class SearchActivityViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val movieResponse = response.body()
                     if (movieResponse != null) {
-                        _movieSearch.value = movieResponse.Search
+                        _movieSearch.value = movieResponse.search
                     }
                 } else {
                     Log.e("Search ViewModel", "API call failed")

@@ -23,13 +23,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         viewModel = ViewModelProvider(this)[LoginActivityViewModel::class.java]
         binding.viewModel = viewModel
         viewModel.setWeakReference(this@LoginActivity)
-
     }
-
 
     override fun onStart() {
         super.onStart()

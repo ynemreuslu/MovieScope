@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviescope.R
-import com.example.moviescope.service.AuthServices
+import com.example.moviescope.service.AuthenticationManager
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 
@@ -28,7 +28,7 @@ class RegisterActivityViewModel : ViewModel() {
 
     fun onRegister() {
         viewModelScope.launch {
-            AuthServices.registerUser(email, password)
+            AuthenticationManager.register(email, password)
             weakReference.get()?.navigateToLoginActivity()
         }
     }

@@ -30,7 +30,8 @@ class SearchActivity : AppCompatActivity() {
         binding.clearButton.visibility = View.GONE
         showSoftKeyboard(binding.searchEditText)
 
-        searchViewModel.getSearh(binding.searchEditText.text.toString())
+        val searchText = binding.searchEditText.text.toString().trim()
+        searchViewModel.getSearh(searchText)
         searchViewModel.movieSearch.observe(this) { movies ->
             searchAdapter.submitList(movies)
         }

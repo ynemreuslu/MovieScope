@@ -11,7 +11,6 @@ import com.example.moviescope.network.ApiClientBuilder
 import com.example.moviescope.network.MovieApi
 import com.example.moviescope.repo.MovieRepository
 import com.example.moviescope.room.MovieModel
-
 import com.example.moviescope.utils.MovieApiConfig
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -31,14 +30,12 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
     private val _favoriteMovies = MutableLiveData<List<MovieModel>>()
     val favoriteMovies: LiveData<List<MovieModel>> get() = _favoriteMovies
 
-
     init {
-
         setMovie()
     }
 
-    fun getDetailsMovies(imdId: String) {
-        val call = movieApi.getDetailsMovies(imdId, MovieApiConfig.API_KEY)
+    fun getDetailsMovies(imdbId: String) {
+        val call = movieApi.getDetailsMovies(imdbId, MovieApiConfig.API_KEY)
         call.enqueue(object : Callback<MovieDetails> {
             override fun onResponse(call: Call<MovieDetails>, response: Response<MovieDetails>) {
                 if (response.isSuccessful) {
@@ -60,7 +57,6 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
                 setMovie()
             }
         }
-
     }
 
     fun movieDelete(movie: MovieModel) {
@@ -70,7 +66,6 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
         }
     }
 
-
     fun setMovie() {
         viewModelScope.launch {
             val updatedFavoriteMovies = movieRepository.getMovieAll()
@@ -79,5 +74,4 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
             getFavMovies.postValue(updatedFavoriteMovies)
         }
     }
-
 }

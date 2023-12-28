@@ -38,13 +38,13 @@ class MovieDetailsActivity : AppCompatActivity() {
 
         movieDetailViewModel.movieDetails.observe(this) { movieDetails ->
             binding.movie = movieDetails
-            Glide.with(this).load(movieDetails.Poster).into(binding.movieDetailsPoster)
+            Glide.with(this).load(movieDetails.poster).into(binding.movieDetailsPoster)
 
             val movie = MovieModel(
                 imdId = movieDetails.imdbID,
-                poster = movieDetails.Poster,
-                title = movieDetails.Title,
-                year = movieDetails.Year
+                poster = movieDetails.poster,
+                title = movieDetails.title,
+                year = movieDetails.year
             )
 
             updateLikeButton(movie)
