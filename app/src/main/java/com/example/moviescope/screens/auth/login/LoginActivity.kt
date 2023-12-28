@@ -10,9 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.moviescope.MainActivity
 import com.example.moviescope.R
+import com.example.moviescope.databinding.ActivityLoginBinding
 import com.example.moviescope.screens.auth.forget.ForgetPassActivity
 import com.example.moviescope.screens.auth.register.RegisterActivity
-import com.example.moviescope.databinding.ActivityLoginBinding
 
 
 class LoginActivity : AppCompatActivity() {
@@ -22,7 +22,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
-
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         viewModel = ViewModelProvider(this)[LoginActivityViewModel::class.java]
